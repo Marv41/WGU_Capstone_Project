@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from main import accuracy, report, cm
+from main import accuracy, report
 
 
 st.title("Rain Model Performance Evaluation")
@@ -20,4 +20,4 @@ st.dataframe(pd.DataFrame(report).transpose())
     
 st.subheader("Confusion Matrix")
 st.write("A confusion matrix shows how well the model's predictions match the actual outcomes. Starting from the top left, when the model predicated NO RAIN, it was correct 103 times, however when it predicted NO RAIN it was wrong 16 times. The model predicted RAIN correctly 126 times and falsly predicated rain 19 times.")
-st.pyplot(cm)
+st.pyplot(st.session_state.confusionMatrix)
