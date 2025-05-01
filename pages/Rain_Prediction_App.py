@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import datetime
-from main import model
+from Home import model
 
 st.title("Rain Prediction")
 
