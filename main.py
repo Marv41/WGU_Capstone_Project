@@ -19,6 +19,7 @@ heatMap, ax1 = plt.subplots(figsize=(8, 6))# Subplots creates figure and axis
 corr = df.corr(numeric_only=True)
 sns.heatmap(corr, annot=True, cmap="plasma", ax=ax1) # CMAP is the color gradient. Annot will display the actual numeric value on heatmap
 ax1.set_title('Correlation Heatmap')
+st.session_state.heatMap = heatMap
 
 # Bar Chart Rained vs No Rain
 rain_counts = df['Rained'].value_counts()
@@ -30,6 +31,7 @@ ax2.set_ylabel('Number of Days')
 ax2.set_xticks(range(len(rain_counts)))
 ax2.set_xticklabels(rain_counts.index, rotation=0) # Adjust Ticks to be horizontal
 barChart.tight_layout() #automatically adjusts the spacing of subplots and labels to prevent overlap
+st.session_state.barChart = barChart
 
 # Scatterplot Date vs Temperature
 dateVtemp_scatterplot, ax3 = plt.subplots(figsize=(16,6))
@@ -40,6 +42,7 @@ ax3.set_ylabel('Temperature', fontsize=24)
 ax3.tick_params(axis='both', labelsize=18)
 ax3.grid(True) # Displays grid
 dateVtemp_scatterplot.tight_layout()
+st.session_state.dateVtemp_scatterplot = dateVtemp_scatterplot
 
 # Scatterplot Precipitation vs Humidity
 pcpVhum_scatterplot, ax4 = plt.subplots(figsize=(16,6))
@@ -50,6 +53,7 @@ ax4.set_ylabel('Precipitation (in)', fontsize=24)
 ax4.tick_params(axis='both', labelsize=18)
 ax4.grid(True)
 pcpVhum_scatterplot.tight_layout()
+st.session_state.pcpVhum_scatterplot = pcpVhum_scatterplot
 
 ## Create 3D scatter plot
 scatterplot3D = px.scatter_3d(
@@ -63,7 +67,6 @@ scatterplot3D = px.scatter_3d(
     title='3D Scatter Plot: Humidity vs Dewpoint vs Precipitation'
 )
 
-# Optional layout tweaks
 scatterplot3D.update_layout(
     width=1000,
     height=800,
@@ -75,6 +78,7 @@ scatterplot3D.update_layout(
         yaxis=dict(autorange='reversed')
     )
 )
+st.session_state.scatterplot3D = scatterplot3D
 
 #Create Train/Testing data split
 features = df[['Temperature', 'Dewpoint', 'Humidity', 'day_of_year','Visibility']]
@@ -88,9 +92,11 @@ y_pred = model.predict(X_test)
 
 # Accuracy
 accuracy = accuracy_score(y_test, y_pred)
+st.session_state.accuracy = accuracy
 
 # Classification Report
 report = classification_report(y_test, y_pred, output_dict=True, target_names=["No Rain", "Rained"])
+st.session_state.report = report
 
 # Confusion Matrix
 cm = confusion_matrix(y_test, y_pred)
@@ -101,3 +107,4 @@ sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabe
 ax5.set_xlabel("Predicted")
 ax5.set_ylabel("Actual")
 ax5.set_title("Confusion Matrix")
+st.session_state.confusionMatrix = confusionMatrix
