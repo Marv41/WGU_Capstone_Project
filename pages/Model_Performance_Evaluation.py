@@ -6,7 +6,7 @@ st.title("Rain Model Performance Evaluation")
 st.write("Supervised learning was used to build this rain prediction model. The model was trained on labeled historical weather data, with the goal of learning the relationship between various weather conditions to make accurate predictions. The Random Forest Classifier algorithm, which was used, combines the results of many decision trees to make a final prediction. Each prediction is categorized as either 'Rained' or 'No Rain'. The model's performance was evaluated using accuracy, precision, recall, and F1-score metrics.")
 
 st.subheader(f"Accuracy:  **{st.session_state.accuracy:.3f}**")
-st.write("Accuracy was calculated by comparing the predictions made by the model (1 for rain, 0 for no rain) to the actual values in the dataset. This machine learning model predicted the correct outcome **86.7%** of the time.")
+st.write(f"Accuracy was calculated by comparing the predictions made by the model (1 for rain, 0 for no rain) to the actual values in the dataset. This machine learning model predicted the correct outcome **{st.session_state.accuracy:.3f}%** of the time.")
    
 st.subheader("Classification Report")
 st.write("The classification report shows several key metrics — **Precision**, **Recall**, **F1-Score** — presented in a table below.")
