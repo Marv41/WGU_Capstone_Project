@@ -89,17 +89,17 @@ model.fit(F_train, pred_train)
 #target_pred = model.predict(F_test) # not using target_pred. Prediction threshold was adjusted
 
 # Adjust threshold so it predict rain more often
-predications_prob = model.predict_proba(F_test)[:, 1] # [:, 1] pull rain probablity in percent for ie .70
-adjusted_predications = (predications_prob >= 0.4).astype(int) # If probablity is higher then .40 it will return 1
+predictions_prob = model.predict_proba(F_test)[:, 1] # [:, 1] pull rain probablity in percent for ie .70
+adjusted_predictions = (predictions_prob >= 0.4).astype(int) # If probablity is higher then .40 it will return 1
 
 # Accuracy
-accuracy = accuracy_score(pred_test, adjusted_predications)
+accuracy = accuracy_score(pred_test, adjusted_predictions)
 
 # Classification Report
-report = classification_report(pred_test, adjusted_predications, output_dict=True, target_names=["No Rain", "Rained"])
+report = classification_report(pred_test, adjusted_predictions, output_dict=True, target_names=["No Rain", "Rained"])
 
 # Confusion Matrix
-cm = confusion_matrix(pred_test, adjusted_predications)
+cm = confusion_matrix(pred_test, adjusted_predictions)
 labels = ['No Rain', 'Rained']
 
 confusionMatrix, ax5 = plt.subplots()
@@ -109,7 +109,7 @@ ax5.set_ylabel("Actual")
 ax5.set_title("Confusion Matrix")
 
 # Interface Starts Here
-st.title("Rain Predicition Interface")
+st.title("Rain Prediction Interface")
 col1, col2, col3 = st.columns(3)
 
 with col1:
