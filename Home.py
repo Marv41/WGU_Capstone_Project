@@ -9,7 +9,7 @@ import seaborn as sns
 import plotly.express as px
 import streamlit as st
 
-# Interface Starts Here
+# Home Page start here
 st.title("Home")
 
 st.write("👋 Hello and welcome!")
@@ -26,15 +26,12 @@ st.markdown("**Github Repository:**(https://github.com/Marv41/WGU_Capstone_Proje
 df = pd.read_csv("weather_data.csv")
 df['Date'] = pd.to_datetime(df['Date']) 
 
-df.info()
-print(df.head(50))
-
 # Correlation Heatmap
 heatMap, ax1 = plt.subplots(figsize=(8, 6))# Subplots creates figure and axis
-corr = df.corr(numeric_only=True)
+corr = df.corr(numeric_only=True) # .corr will generate a correlation matrix 
 sns.heatmap(corr, annot=True, cmap="plasma", ax=ax1) # CMAP is the color gradient. Annot will display the actual numeric value on heatmap
 ax1.set_title('Correlation Heatmap')
-st.session_state.heatMap = heatMap
+st.session_state.heatMap = heatMap # Save Figure to use on another page
 
 # Bar Chart Rained vs No Rain
 rain_counts = df['Rained'].value_counts()
